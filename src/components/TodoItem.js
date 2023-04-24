@@ -1,14 +1,26 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { toggleCompleted } from '../redux/todoSlice';
 
-const TodoItem =({completed, title}) => {
-  return (
-    <li className='list-group-item'>
+const TodoItem = ({ completed, title, id }) => {
+
+	const dispatch = useDispatch();
+	const handleCompleteClick = () => {
+		dispatch(toggleCompleted({
+			id: id,
+			completed: !completed
+		}))
+	}
+
+	return (
+		<li className={`list-group-item ${completed && 'list-group-item-success'}`}>
 			<div className='d-flex justify-content-between'>
-				<span className='d-flex align-items-center padding-left'>
+				<span className='d-flex align-items-center'>
 					<input
 						type='checkbox'
 						className='mr-3'
 						checked={completed}
+						onChange={handleCompleteClick}
 					></input>
 					{title}
 				</span>
@@ -17,7 +29,7 @@ const TodoItem =({completed, title}) => {
 				</button>
 			</div>
 		</li>
-  )
+	)
 }
 
 export default TodoItem
