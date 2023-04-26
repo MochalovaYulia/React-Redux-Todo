@@ -11,9 +11,13 @@ const AddTodoForm = () => {
         e.preventDefault();
         dispatch(addTodo({
             title: value,
-
         }))
+        setValue('')
     } 
+
+    const handleChange = (event) => {
+        setValue(event.target.value)
+    }
 
     return (
         <form onSubmit={onSubmit} className='form-inline mt-3 mb-3'>
@@ -22,7 +26,7 @@ const AddTodoForm = () => {
                 className='form-control mb-2 mr-sm-2'
                 placeholder='Add todo...'
                 value={value}
-                onChange={(event) => setValue(event.target.value)}
+                onChange={handleChange}
             ></input>
 
             <button type='submit' className='btn btn-primary mb-2'>

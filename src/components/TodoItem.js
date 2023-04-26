@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { toggleCompleted } from '../redux/todoSlice';
+import { deleteTodo, toggleCompleted } from '../redux/todoSlice';
 
 const TodoItem = ({ completed, title, id }) => {
 
@@ -9,6 +9,11 @@ const TodoItem = ({ completed, title, id }) => {
 		dispatch(toggleCompleted({
 			id: id,
 			completed: !completed
+		}))
+	}
+	const handleDeleteCklick = () => {
+		dispatch(deleteTodo({
+			id: id,
 		}))
 	}
 
@@ -24,7 +29,7 @@ const TodoItem = ({ completed, title, id }) => {
 					></input>
 					{title}
 				</span>
-				<button className='btn btn-danger'>
+				<button className='btn btn-danger' onClick={handleDeleteCklick}>
 					Delete
 				</button>
 			</div>
